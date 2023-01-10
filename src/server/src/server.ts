@@ -52,7 +52,7 @@ export default function runBuildTracker(config: ServerConfig): Application {
   const { handlers, port = 3000, url, ...appConfig } = config;
   const IN_DEV = process.env.NODE_ENV !== 'production' && config.dev;
   app.use(reqLogger);
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: '1mb' }));
 
   app.use(api(express.Router(), config, handlers));
 
